@@ -1,0 +1,181 @@
+PFont gluck;
+
+int value =0;
+Table table;
+
+
+void setup () {
+  size (1224, 768, P3D);
+  gluck = loadFont("GandhiSans-Regular-20.vlw");
+  textFont(gluck, 16);
+  //translate(0,0,0);
+}
+
+float zval;
+float rval = 0;
+void draw() {
+  background (255); 
+
+  rval += 0.0008;
+  rotateX(rval); 
+
+  table = loadTable("2D.csv", "header");
+
+  println(table.getRowCount() + " filas en total en la tabla");
+
+  fill(0);
+  text (" CIENCIAS NATURALES ", 100, 10);
+  text (" INGENIERIA Y TECNOLOGIA ", 300, 110);
+  text (" CIENCIAS MEDICAS Y DE LA SALUD", 500, 330);
+  text (" CIENCIAS AGRICOLAS", 850, 580);
+  text (" CIENCIAS SOCIALES", 1050, 680);
+  text (" HUMANIDADES", 1150, 680);
+
+  text (" CATEGORIA FUENTES COLCIENCIAS", 800, 60);
+   text (" Dividido por Areá de conocimiento", 800, 80);
+  fill(255, 112, 67);
+  rect(830, 100, 10, 10); 
+  text (" A1", 800, 110);
+  fill(84, 110, 122);
+  rect(830, 120, 10, 10); 
+  text (" A", 800, 130);
+  fill(0, 172, 193);
+  rect(830, 140, 10, 10); 
+  text (" B", 800, 150);
+  fill(255, 179, 0);
+  rect(830, 160, 10, 10); 
+  text (" C", 800, 170);
+  fill(124, 179, 66);
+  rect(830, 180, 10, 10); 
+  text (" D", 800, 190);
+  fill(81, 57, 122);
+  rect(830, 200, 10, 10); 
+  text (" R            NO RECONOCIDO", 800, 210);
+
+
+
+  for (int recorrer=0; recorrer<table.getRowCount(); recorrer=recorrer+1) {
+    //Naranja
+    fill(255, 112, 67);
+    // traslación de coordenadas.
+    // x=30, y=30, z=10;
+    translate (30, 30, 10);
+    box (80, 20, 20);
+    text(table.getInt(recorrer, 1), 20+table.getInt(recorrer, 1), 30+recorrer*50);
+
+
+    //gris
+    fill(84, 110, 122);
+    translate (30, 30, 10);
+    box (80, 20, 20);
+    text(table.getInt(recorrer, 2), 200+table.getInt(recorrer, 2), 30+recorrer*150);
+
+    //azul
+    fill(0, 172, 193);
+    translate (30, 30, 10);
+    box (85, 20, 30);
+    text(table.getInt(recorrer, 3), 40+table.getInt(recorrer, 3), 40+recorrer*40);
+
+    //amarillo
+    fill(255, 179, 0);
+    translate (30, 30, 10);
+    box (85, 20, 30);
+    text(table.getInt(recorrer, 3),20+table.getInt(recorrer, 4), 40+recorrer*40);
+    fill(230);
+    rect(60, 20, 400, 160, 7);
+
+    //verde
+    fill(124, 179, 66);
+    translate (90, 30, 10);
+    box (85, 20, 30);
+    text(table.getInt(recorrer, 5), 60+table.getInt(recorrer, 5), 50+recorrer*40);
+
+    //morado
+    fill(81, 57, 122);
+    translate (30, 30, 10);
+    box (85, 20, 30);
+    text(table.getInt(recorrer, 6), 70+table.getInt(recorrer, 6), 60+recorrer*40);
+
+    //negro
+    fill(0);
+    translate (30, 30, 10);
+    box (85, 20, 30);
+    text(table.getInt(recorrer, 7), 80+table.getInt(recorrer, 7), 70+recorrer*40);
+  }
+  //tabla.getInt(f,c)
+
+
+
+
+
+
+  for (TableRow row : table.rows()) {
+    int id = row.getInt("id");
+
+    float a =  row.getFloat ("a");
+    float b =  row.getFloat ("b");
+    float c =  row.getFloat ("c");
+    float d =  row.getFloat ("d");
+    float e =  row.getFloat ("e");
+    float f =  row.getFloat ("f");
+  }
+
+
+  //gluck = loadFont("AdobeHeitiStd-Regular-18.vlw");
+  //textFont(gluck, 18);
+
+
+
+  //letrero
+  fill (0, 206, 200);
+  text("DISTRIBUCION DE LOS GRUPOS DE INVESTIGACION", 80, 40);
+  fill(255, 139, 0);
+  text("POR GRAN AREA DE CONOCIMIENTO OCDE", 80, 75);
+
+  fill(224, 232, 249);
+  ellipse(270, 125, 7, 7);
+
+
+  noStroke();
+
+  //rect(765, 590, 110, 70);
+  //rect(765, 490, 110, 70);
+
+
+
+
+  //Barras colores por categoria
+  //Ciencias Naturales
+  fill(0, 150, 151);
+  text("CIENCIAS NATURALES", 95, 125);
+  text("Y EXACTAS", 95, 140);
+
+
+  // Ingenieria y tecnologia
+  fill(0, 174, 193);
+  text("INGENIERIAS ", 95, 220);
+  text("Y TECNOLOGIA ", 95, 235);
+
+  //Ciencias medicas y de la salud
+  fill(0, 201, 193);
+  text("CIENCIAS MEDICAS ", 95, 320);
+  text("Y DE LA SALUD ", 95, 335);
+  //Ciencias Medicas
+  fill(0, 239, 193);
+  text("CIENCIAS AGRICOLAS ", 95, 430);
+
+  //Ciencias Agricolas
+  fill(0, 215, 152);
+  text("CIENCIAS SOCIALES", 95, 530);
+  //Humanidades
+  fill(0, 196, 82);
+  text("HUMANIDADES", 95, 630);
+  //reconocidos no clasificados
+  //fill(0, 135, 82);
+  //rect(80, 690, 10, 60);
+  //text("OTROS-NO REGISTRA", 95, 730); 
+
+
+  //otra = loadFont("Alcefun-Bold-42.vlw");
+  //textFont(otra, 42);
+}
